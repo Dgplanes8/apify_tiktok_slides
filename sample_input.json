@@ -1,0 +1,72 @@
+[
+  {
+    "url": "https://www.tiktok.com/@example_user",
+    "error": "This profile/hashtag does not exist."
+  },
+  {
+    "id": "7309919649490029856",
+    "text": "Sample slideshow post #example #tiktok",
+    "textLanguage": "en",
+    "createTime": 1701973303,
+    "createTimeISO": "2023-12-07T18:21:43.000Z",
+    "locationCreated": "US",
+    "isAd": false,
+    "authorMeta": {
+      "id": "1234567890",
+      "name": "example_user",
+      "profileUrl": "https://www.tiktok.com/@example_user",
+      "nickName": "Example User",
+      "verified": false,
+      "signature": "This is a sample bio",
+      "bioLink": "https://example.com",
+      "avatar": "https://example.com/avatar.jpg",
+      "privateAccount": false,
+      "following": 100,
+      "fans": 10000,
+      "heart": 50000,
+      "video": 50
+    },
+    "musicMeta": {
+      "musicName": "Sample Song",
+      "musicAuthor": "Sample Artist",
+      "musicOriginal": false
+    },
+    "webVideoUrl": "https://www.tiktok.com/@example_user/video/7309919649490029856",
+    "videoMeta": {
+      "height": 0,
+      "width": 0,
+      "duration": 0,
+      "coverUrl": "https://example.com/cover.jpg"
+    },
+    "diggCount": 1000,
+    "shareCount": 100,
+    "playCount": 10000,
+    "collectCount": 50,
+    "commentCount": 25,
+    "hashtags": [
+      {
+        "id": "123",
+        "name": "example",
+        "title": "Example Hashtag"
+      },
+      {
+        "id": "456",
+        "name": "tiktok",
+        "title": "TikTok"
+      }
+    ],
+    "isSlideshow": true,
+    "slideshowImageLinks": [
+      {
+        "tiktokLink": "https://example.com/slide1.jpg",
+        "downloadLink": "https://example.com/download/slide1.jpg"
+      },
+      {
+        "tiktokLink": "https://example.com/slide2.jpg",
+        "downloadLink": "https://example.com/download/slide2.jpg"
+      }
+    ],
+    "isPinned": false,
+    "isSponsored": false
+  }
+]
