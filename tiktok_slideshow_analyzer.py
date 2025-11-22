@@ -15,18 +15,20 @@ import time
 
 
 class TikTokSlideshowAnalyzer:
-    def __init__(self, json_file: str, output_dir: str = "output"):
+    def __init__(self, json_file: str, output_dir: str = "output", apify_token: str = None):
         """
         Initialize the TikTok Slideshow Analyzer.
 
         Args:
             json_file: Path to the JSON file containing TikTok data
             output_dir: Directory where images and metadata will be saved
+            apify_token: Optional Apify API token for downloading images from key-value stores
         """
         self.json_file = json_file
         self.output_dir = Path(output_dir)
         self.images_dir = self.output_dir / "images"
         self.metadata_dir = self.output_dir / "metadata"
+        self.apify_token = apify_token
 
         # Create output directories
         self.images_dir.mkdir(parents=True, exist_ok=True)
@@ -61,9 +63,15 @@ class TikTokSlideshowAnalyzer:
         Returns:
             True if download successful, False otherwise
         """
+        # Add Apify token to URL if it's from api.apify.com
+        download_url = url
+        if self.apify_token and 'api.apify.com' in url:
+            separator = '&' if '?' in url else '?'
+            download_url = f"{url}{separator}token={self.apify_token}"
+
         for attempt in range(max_retries):
             try:
-                response = requests.get(url, timeout=30, stream=True)
+                response = requests.get(download_url, timeout=30, stream=True)
                 response.raise_for_status()
 
                 with open(filepath, 'wb') as f:
@@ -303,6 +311,10 @@ def main():
         default='output',
         help='Output directory (default: output)'
     )
+    parser.add_argument(
+        '-t', '--token',
+        help='Apify API token for downloading images from key-value stores (can also use APIFY_TOKEN env var)'
+    )
 
     args = parser.parse_args()
 
@@ -311,8 +323,11 @@ def main():
         print(f"Error: File '{args.json_file}' not found")
         return 1
 
+    # Get token from args or environment
+    apify_token = args.token or os.environ.get('APIFY_TOKEN')
+
     # Run analyzer
-    analyzer = TikTokSlideshowAnalyzer(args.json_file, args.output)
+    analyzer = TikTokSlideshowAnalyzer(args.json_file, args.output, apify_token)
     analyzer.run()
 
     return 0
